@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="SakuraLounge.OurStory"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SakuraLounge"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+
+    <!--<Grid CornerRadius="40,40,20,20">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Dragon_scroll.png" Opacity="0.9"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>-->
+    <Grid>
+        <!-- Add your dragon image and waves background here -->
+        <Image Source="/Assets/Dragon_scroll.png" Stretch="UniformToFill"/>
+
+        <!-- Box with background to display company information -->
+        <Border Background="#80000000" Padding="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel>
+                <Image x:Name="imageDice1" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0" Source="/Assets/My project.png" HorizontalAlignment="Center" />
+                <TextBlock Text="SakuraLounge" FontSize="36" Foreground="White" FontWeight="Bold" />
+                <TextBlock Text="Address: 123 Harmony Street, Nature City" FontSize="20" Foreground="#60A3D9" />
+                <TextBlock Text="Phone: +1 (123) 456-7890" FontSize="20" Foreground="#60A3D9" />
+                <TextBlock Text="Email: info@company.com" FontSize="20" Foreground="#60A3D9" />
+            </StackPanel>
+        </Border>
+    </Grid>
+
+
+
+
+<!--</Grid>-->
+</Page>

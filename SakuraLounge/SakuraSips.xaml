@@ -1,0 +1,57 @@
+﻿<Page
+    x:Class="SakuraLounge.SakuraSips"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SakuraLounge"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid CornerRadius="40,40,20,20">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/sakura_background_2.png" Opacity="0.9"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+
+        <TextBlock Grid.Row="1" Text="Drinks" Grid.Column="2" FontSize="32" Grid.ColumnSpan="3" TextAlignment="Center"/>
+        <Button x:Name="Drink1" Click="Drink1_Click" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Image Source="Assets/Cocktail_1.png"   />
+        </Button>
+        <Button x:Name="Drink2" Click="Drink2_Click" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Image Source="Assets/fiery_cocktail.png"   />
+        </Button>
+        <Button x:Name="Drink3" Click="Drink1_Click" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Image Source="Assets/mojito_with_a_tropical_twist.png" />
+        </Button>
+        <Button x:Name="Drink4" Click="Drink2_Click" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Image Source="Assets/mystical_cocktail.png"   />
+        </Button>
+        <Button x:Name="Drink5" Click="Drink2_Click" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Image Source="Assets/green_tea_latte.png"   />
+        </Button>
+        <Button x:Name="Drink6" Click="Drink2_Click" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Image Source="Assets/martini.png"   />
+        </Button>
+    </Grid>
+</Page>
