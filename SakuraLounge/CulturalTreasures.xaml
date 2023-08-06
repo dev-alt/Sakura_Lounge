@@ -17,7 +17,7 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="5*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
@@ -27,11 +27,11 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
@@ -41,6 +41,9 @@
         <Button x:Name="PlayGameSlots" Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="3" Margin="15, 5, 5, 5"
                 Content="Play" Foreground="white" 
                 BorderBrush="white" Click="PlayGameSlots_Click" FontSize="24" BorderThickness="4" CornerRadius="2"/>
+        <Image  Grid.Row="3" Grid.Column="2"  Height="180" Margin="0,10,0,10"  Source="/Assets/dragon_slot_icon.png" />
+        <Image  Grid.Row="3" Grid.Column="4"  Height="180" Margin="0,10,0,10"  Source="/Assets/dragon_slot_icon.png" />
+        <Image Grid.Row="3" Grid.Column="6"  Height="180" Margin="0,10,0,10"  Source="/Assets/dragon_slot_icon.png" />
 
     </Grid>
 </Page>
