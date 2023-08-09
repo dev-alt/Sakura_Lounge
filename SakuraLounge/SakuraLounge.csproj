@@ -124,6 +124,8 @@
     </Compile>
     <Compile Include="Classes\GenerateFortune.cs" />
     <Compile Include="Classes\Lotto.cs" />
+    <Compile Include="Classes\SlotMachine.cs" />
+    <Compile Include="Classes\Wheel.cs" />
     <Compile Include="CulturalTreasures.xaml.cs">
       <DependentUpon>CulturalTreasures.xaml</DependentUpon>
     </Compile>
@@ -138,9 +140,6 @@
     </Compile>
     <Compile Include="GamesOfTheOrient.xaml.cs">
       <DependentUpon>GamesOfTheOrient.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LocationPage.xaml.cs">
-      <DependentUpon>LocationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="LuckyPetalsLotto.xaml.cs">
       <DependentUpon>LuckyPetalsLotto.xaml</DependentUpon>
@@ -168,9 +167,18 @@
   <ItemGroup>
     <Content Include="Assets\0rx2ymw6.bmp" />
     <Content Include="Assets\bar_background.png" />
+    <Content Include="Assets\Bonsai_Tree.png" />
+    <Content Include="Assets\Cherry_blossom_Charm.png" />
     <Content Include="Assets\cherry_blossom_hero.jpg" />
     <Content Include="Assets\Cocktail_1.png" />
     <Content Include="Assets\.png" />
+    <Content Include="Assets\coins.png" />
+    <Content Include="Assets\coins.wav" />
+    <Content Include="Assets\slot_machine_insert_3_coins_and_spin.wav" />
+    <Content Include="Assets\slot_payoff.wav" />
+    <Content Include="Assets\WinGame.png" />
+    <Content Include="Assets\Koi_Fish.png" />
+    <Content Include="Assets\Lucky_Lantern.png" />
     <Content Include="Assets\Map.png" />
     <Content Include="Assets\dragon_slot_icon.png" />
     <Content Include="Assets\Dragon_background.png" />
@@ -225,10 +233,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GamesOfTheOrient.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LocationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

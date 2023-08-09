@@ -7,10 +7,10 @@ using Windows.UI.Xaml.Controls;
 
 namespace SakuraLounge.Classes
 {
-    class Lotto
+    internal class Lotto
     {
-        private int[] _numArray;
-        private Random _randomNumber;
+        private readonly int[] _numArray;
+        private readonly Random _randomNumber;
 
         public Lotto()
         {
