@@ -61,7 +61,13 @@ namespace SakuraLounge
             this.Suspending += OnSuspending;
         }
 
+
+        public static void CallMethod()
+        {
+
+        }
         /// <summary>
+        /// 
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>

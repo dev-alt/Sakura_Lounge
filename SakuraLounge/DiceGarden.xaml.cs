@@ -49,6 +49,11 @@ namespace SakuraLounge
             _number = new Random(DateTime.Now.Millisecond);
 
         }
+
+        public void Call()
+        {
+
+        }
         private void player1Roll_Click(object sender, RoutedEventArgs e)
         {
             _roll1 = _number.Next(1, 7);
