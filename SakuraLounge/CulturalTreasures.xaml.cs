@@ -26,10 +26,15 @@ namespace SakuraLounge
         public CulturalTreasures()
         {
             this.InitializeComponent();
-            slotMachine = new SlotMachine(PlayGameSlots, Slot_One, Slot_Two, Slot_Three, imageWinLose, textBlockDollars, textBlockResult);
-
-            slotMachine.Initialize(); // Call the Initialize method to properly set up the slot machine
+            slotMachine = new SlotMachine(PlayGameSlots, new Image[] { Slot_One, Slot_Two, Slot_Three }, textBlockDollars);
+            slotMachine.ResultUpdated += SlotMachine_ResultUpdated; // Subscribe to the event
+            slotMachine.Initialize(); 
         }
+        private void SlotMachine_ResultUpdated(object sender, SlotMachine.ResultEventArgs e)
+        {
+            textBlockResult.Text = e.Message;
+        }
+
 
         private void PlayGameSlots_Click(object sender, RoutedEventArgs e)
         {

@@ -15,243 +15,207 @@ namespace SakuraLounge.Classes
 {
     internal class SlotMachine
     {
-        private Random number;
-        private Boolean wheel1Clicked = false;
-        private Boolean wheel2Clicked = false;
-        private Boolean wheel3Clicked = false;
-        private MediaPlayer mediaPlayer;
-        private int wheel1;
-        private int wheel2;
-        private int wheel3;
-        private int dollars;
-        private Boolean loadUp = true;
-        private Button PlayGameSlots;
-        private Image Slot_One;
-        private Image Slot_Two;
-        private Image Slot_Three;
-        private Image imageWinLose;
-        private TextBlock textBlockDollars;
-        private TextBlock resultAnnounce;
-        private Uri[] wheelImageUris = new Uri[6];
+        private Random _random;
+        private readonly bool[] _wheelClicked = new bool[3];
+        private readonly MediaPlayer _mediaPlayer;
+        private readonly int[] _wheels = new int[3];
+        private int _dollars;
+        private bool _loadedUp = true;
+        private readonly Button _playGameSlots;
+        private readonly Image[] _slotImages;
+        private readonly TextBlock _dollarsTextBlock;
+        private readonly Uri[] _wheelImageUris = new Uri[6];
+        public event EventHandler<ResultEventArgs> ResultUpdated;
 
-
-        public SlotMachine(Button playGameSlots, Image slotOne, Image slotTwo, Image slotThree,
-            Image winLoseImage, TextBlock dollarsTextBlock, TextBlock textBlockResult)
+        public class ResultEventArgs : EventArgs
         {
-            PlayGameSlots = playGameSlots;
-            Slot_One = slotOne;
-            Slot_Two = slotTwo;
-            Slot_Three = slotThree;
-            imageWinLose = winLoseImage;
-            textBlockDollars = dollarsTextBlock;
-            resultAnnounce = textBlockResult;
-            mediaPlayer = new MediaPlayer();
+            public string Message { get; set; }
+        }
 
+        public SlotMachine(Button playGameSlots, Image[] slotImages, TextBlock dollarsTextBlock)
+        {
+            _playGameSlots = playGameSlots;
+            _slotImages = slotImages;
+            _dollarsTextBlock = dollarsTextBlock;
+            _mediaPlayer = new MediaPlayer();
         }
 
         public void Initialize()
         {
-            number = new Random(DateTime.Now.Millisecond);
+            _random = new Random(DateTime.Now.Millisecond);
 
-            PlayGameSlots.Visibility = Visibility.Collapsed;
-
-            Slot_One.Source =
-                new BitmapImage(new Uri("ms-appx:///Assets/dragon_slot_icon.png", UriKind.RelativeOrAbsolute));
-            Slot_Two.Source =
-                new BitmapImage(new Uri("ms-appx:///Assets/dragon_slot_icon.png", UriKind.RelativeOrAbsolute));
-            Slot_Three.Source =
-                new BitmapImage(new Uri("ms-appx:///Assets/dragon_slot_icon.png", UriKind.RelativeOrAbsolute));
-            imageWinLose.Source = new BitmapImage(new Uri("ms-appx:///Assets/coins.png", UriKind.RelativeOrAbsolute));
-            wheelImageUris[0] = new Uri("ms-appx:///Assets/coins.png", UriKind.RelativeOrAbsolute);
-            wheelImageUris[1] = new Uri("ms-appx:///Assets/Cherry_blossom_Charm.png", UriKind.RelativeOrAbsolute);
-            wheelImageUris[2] = new Uri("ms-appx:///Assets/Bonsai_Tree.png", UriKind.RelativeOrAbsolute);
-            wheelImageUris[3] = new Uri("ms-appx:///Assets/Koi_Fish.png", UriKind.RelativeOrAbsolute);
-            wheelImageUris[4] = new Uri("ms-appx:///Assets/Lucky_Lantern.png", UriKind.RelativeOrAbsolute);
-            wheelImageUris[5] = new Uri("ms-appx:///Assets/dragon_slot_icon.png", UriKind.RelativeOrAbsolute);
+            _wheelImageUris[0] = new Uri("ms-appx:///Assets/coins.png");
+            _wheelImageUris[1] = new Uri("ms-appx:///Assets/Cherry_blossom_Charm.png");
+            _wheelImageUris[2] = new Uri("ms-appx:///Assets/Bonsai_Tree.png");
+            _wheelImageUris[3] = new Uri("ms-appx:///Assets/Koi_Fish.png");
+            _wheelImageUris[4] = new Uri("ms-appx:///Assets/Lucky_Lantern.png");
+            _wheelImageUris[5] = new Uri("ms-appx:///Assets/dragon_slot_icon.png");
         }
 
         private void PlayJackpotSound()
         {
-            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/slot_payoff.wav"));
-            mediaPlayer.Volume = 0.1;
-            mediaPlayer.Play();
-        }
-
-        public void CheckWinningsAndLoosing()
-        {
-            int payout = 0;
-
-            switch (wheel1)
-            {
-                case 6 when wheel2 == 6 && wheel3 == 6:
-                    payout = 60;
-                    PlayJackpotSound();
-                    resultAnnounce.Text = "You have gained $" + payout;
-                    break;
-                case 5 when wheel2 == 5 && wheel3 == 5:
-                    payout = 50;
-                    resultAnnounce.Text = "You have gained $" + payout;
-                    break;
-                case 4 when wheel2 == 4 && wheel3 == 4:
-                    payout = 40;
-                    resultAnnounce.Text = "You have gained $" + payout;
-                    break;
-                case 3 when wheel2 == 3 && wheel3 == 3:
-                    payout = 30;
-                    resultAnnounce.Text = "You have gained $" + payout;
-                    break;
-                case 2 when wheel2 == 2 && wheel3 == 2:
-                    payout = 20;
-                    resultAnnounce.Text = "You have gained $" + payout;
-                    break;
-                case 5 when wheel2 == 5 && wheel3 == 6:
-                    payout = 10;
-                    resultAnnounce.Text = "You have gained $" + payout;
-                    break;
-                case 4 when wheel2 == 4 && wheel3 == 6:
-                    payout = 8;
-                    resultAnnounce.Text = "You have gained $" + payout;
-                    break;
-                case 3 when wheel2 == 3 && wheel3 == 6:
-                    payout = 6;
-                    resultAnnounce.Text = "You have gained $" + payout;
-                    break;
-                case 2 when wheel2 == 2 && wheel3 == 6:
-                    payout = 4;
-                    resultAnnounce.Text = "You have gained $" + payout;
-                    break;
-            }
-
-            if (payout > 0)
-            {
-                dollars += payout;
-                imageWinLose.Source =
-                    new BitmapImage(new Uri("ms-appx:///Assets/WinGame.png", UriKind.RelativeOrAbsolute));
-            }
-
-            // Handle losing scenarios
-            else if (wheel1 == 1 || wheel2 == 1 || wheel3 == 1)
-            {
-                dollars -= 2;
-                imageWinLose.Source =
-                    new BitmapImage(new Uri("ms-appx:///Assets/LoseGame.png", UriKind.RelativeOrAbsolute));
-                resultAnnounce.Text = "You have lost";
-            }
-            // Update displayed dollars
-            textBlockDollars.Text = "You have $" + dollars;
-
-        }
-
-        internal void buttonAddCash_Click(object sender, RoutedEventArgs e)
-        {
-            // Add a certain amount of dollars when the button is clicked
-            dollars += 10; // For example, adding $10
-            textBlockDollars.Text = "You have $" + dollars; // Update the displayed dollars
-            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/coins.wav"));
-            mediaPlayer.Play();
-
-            if (dollars > 0) PlayGameSlots.Visibility = Visibility.Visible;
-        }
-
-        internal void Slot_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (sender == Slot_One)
-            {
-                ToggleWheel1();
-                Slot_One.Opacity = wheel1Clicked ? 0.5 : 1.0;
-            }
-            else if (sender == Slot_Two)
-            {
-                ToggleWheel2();
-                Slot_Two.Opacity = wheel2Clicked ? 0.5 : 1.0;
-            }
-            else if (sender == Slot_Three)
-            {
-                ToggleWheel3();
-                Slot_Three.Opacity = wheel3Clicked ? 0.5 : 1.0;
-            }
-        }
-
-        internal void ToggleWheel1()
-        {
-            wheel1Clicked = !wheel1Clicked;
-        }
-
-        internal void ToggleWheel2()
-        {
-            wheel2Clicked = !wheel2Clicked;
-        }
-
-        internal void ToggleWheel3()
-        {
-            wheel3Clicked = !wheel3Clicked;
-        }
-
-        public void PlayGameSlots_Click(object sender, RoutedEventArgs routedEventArgs)
-        {
-
-            if (loadUp == true)
-            {
-                wheel1Clicked = false;
-                wheel2Clicked = false;
-                wheel3Clicked = false;
-                loadUp = false;
-            }
-
-
-            if (dollars <= 0)
-            {
-                PlayGameSlots.Visibility = Visibility.Collapsed;
-                dollars = 0;
-            }
-
-            //PlaySpinSound();
-            SpinWheels(); // Example method to simulate spinning the wheels
-            CheckWinningsAndLoosing(); // Example method to check the winnings and losses
-
-            Slot_One.Opacity = wheel1Clicked ? 0.5 : 1.0;
-            Slot_Two.Opacity = wheel2Clicked ? 0.5 : 1.0;
-            Slot_Three.Opacity = wheel3Clicked ? 0.5 : 1.0;
-        }
-
-        private void PlaySpinSound()
-        {
-            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/slot_machine_insert_3_coins_and_spin.wav"));
-            mediaPlayer.Play();
-        }
-
-        private void SpinWheels()
-        {
-            wheel1 = number.Next(1, 7);
-            wheel2 = number.Next(1, 7);
-            wheel3 = number.Next(1, 7);
-
-            UpdateSlotImages();
-        }
-
-        private void UpdateSlotImages()
-        {
-            UpdateSlotImage(Slot_One, wheel1);
-            UpdateSlotImage(Slot_Two, wheel2);
-            UpdateSlotImage(Slot_Three, wheel3);
+            _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/slot_payoff.wav"));
+            _mediaPlayer.Volume = 0.1;
+            _mediaPlayer.Play();
         }
 
         private void UpdateSlotImage(Image image, int wheelValue)
         {
             int imageIndex = wheelValue - 1;
-            if (imageIndex >= 0 && imageIndex < wheelImageUris.Length)
+            if (imageIndex >= 0 && imageIndex < _wheelImageUris.Length)
             {
-                image.Source = new BitmapImage(wheelImageUris[imageIndex]);
+                image.Source = new BitmapImage(_wheelImageUris[imageIndex]);
             }
         }
+
+        private void PlaySpinSound()
+        {
+            _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/coins.wav"));
+            _mediaPlayer.Play();
+        }
+
         public void CheatButton_Click()
         {
-            wheel1 = 6;
-            wheel2 = 6;
-            wheel3 = 6;
-
+            SetAllWheelsToSameValue(6);
             UpdateSlotImages();
-            CheckWinningsAndLoosing();
+            CheckWinningsAndLosses();
         }
+
+        private void SetAllWheelsToSameValue(int value)
+        {
+            for (int i = 0; i < _wheels.Length; i++)
+            {
+                _wheels[i] = value;
+            }
+        }
+
+        private void InitializeGameIfLoadedUp()
+        {
+            if (!_loadedUp) return;
+            ResetWheelClicks();
+            _loadedUp = false;
+        }
+
+        private void ResetWheelClicks()
+        {
+            for (int i = 0; i < _wheelClicked.Length; i++)
+            {
+                _wheelClicked[i] = false;
+            }
+        }
+
+        private void SpinWheels()
+        {
+            for (int i = 0; i < _wheels.Length; i++)
+            {
+                _wheels[i] = _random.Next(1, 7);
+            }
+            UpdateSlotImages();
+        }
+
+        private void UpdateSlotImages()
+        {
+            for (int i = 0; i < _slotImages.Length; i++)
+            {
+                UpdateSlotImage(_slotImages[i], _wheels[i]);
+            }
+        }
+
+        private void UpdateSlotOpacities()
+        {
+            _slotImages[0].Opacity = _wheelClicked[0] ? 0.5 : 1.0;
+            _slotImages[1].Opacity = _wheelClicked[1] ? 0.5 : 1.0;
+            _slotImages[2].Opacity = _wheelClicked[2] ? 0.5 : 1.0;
+        }
+
+        private void CheckWinningsAndLosses()
+        {
+            int payout = 0;
+            string resultMessage = "";
+
+            if (_wheels[0] == _wheels[1] && _wheels[1] == _wheels[2])
+            {
+                payout = 10;
+                PlayJackpotSound();
+            }
+
+            if (payout > 0)
+            {
+                _dollars += payout;
+                resultMessage = "You have gained $" + payout;
+            }
+            else
+            {
+                _dollars -= 2; 
+                resultMessage = "You have lost";
+            }
+
+            _dollarsTextBlock.Text = "You have $" + _dollars;
+            ResultUpdated?.Invoke(this, new ResultEventArgs { Message = resultMessage });
+        }
+
+
+
+        public void PlayGameSlots_Click(object sender, RoutedEventArgs e)
+        {
+            InitializeGameIfLoadedUp();
+
+            if (_dollars <= 0)
+            {
+                _playGameSlots.Visibility = Visibility.Collapsed;
+                _dollars = 0;
+            }
+
+            SpinWheels();
+            CheckWinningsAndLosses();
+            UpdateSlotOpacities();
+        }
+        internal void ToggleWheel1()
+        {
+            _wheelClicked[0] = !_wheelClicked[0];
+        }
+
+        internal void ToggleWheel2()
+        {
+            _wheelClicked[1] = !_wheelClicked[1];
+        }
+
+        internal void ToggleWheel3()
+        {
+            _wheelClicked[2] = !_wheelClicked[2];
+        }
+
+        internal void Slot_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (sender == _slotImages[0])
+            {
+                ToggleWheel1();
+                _slotImages[0].Opacity = _wheelClicked[0] ? 0.5 : 1.0;
+            }
+            else if (sender == _slotImages[1])
+            {
+                ToggleWheel2();
+                _slotImages[1].Opacity = _wheelClicked[1] ? 0.5 : 1.0;
+            }
+            else if (sender == _slotImages[2])
+            {
+                ToggleWheel3();
+                _slotImages[2].Opacity = _wheelClicked[2] ? 0.5 : 1.0;
+            }
+        }
+
+        internal void buttonAddCash_Click(object sender, RoutedEventArgs e)
+        {
+            _dollars += 10;
+            _dollarsTextBlock.Text = "You have $" + _dollars;
+            _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/coins.wav"));
+            _mediaPlayer.Play();
+
+            if (_dollars > 0)
+            {
+                _playGameSlots.Visibility = Visibility.Visible;
+            }
+        }
+
     }
 }
