@@ -157,7 +157,7 @@
     <Compile Include="SakuraSips.xaml.cs">
       <DependentUpon>SakuraSips.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TestMe.cs" />
+    <Compile Include="Classes\ScoreManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

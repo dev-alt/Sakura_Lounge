@@ -36,12 +36,8 @@ namespace SakuraLounge
 
             fortune.Generate(FortuneBox);
 
-            TestMe testme1;
 
-            testme1 = new TestMe();
-            testme1.Test();
 
-            
-    }
+        }
     }
 }
