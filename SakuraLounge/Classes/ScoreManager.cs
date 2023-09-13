@@ -52,7 +52,6 @@ namespace SakuraLounge
                 {
                     if (int.TryParse(await reader.ReadLineAsync(), out int score))
                     {
-                        // Update the score using the AddScore method
                         AddScore(score);
                     }
                 }

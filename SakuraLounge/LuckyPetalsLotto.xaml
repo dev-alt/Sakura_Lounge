@@ -9,13 +9,15 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid CornerRadius="40,40,20,20">
-        
+
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/sakura_background_2.png" Opacity="0.7"/>
         </Grid.Background>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="10*" />
             <RowDefinition Height="10*" />
             <RowDefinition Height="10*" />
             <RowDefinition Height="10*" />
@@ -26,9 +28,11 @@
             <RowDefinition Height="10*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="10*" />
             <ColumnDefinition Width="10*" />
             <ColumnDefinition Width="10*" />
             <ColumnDefinition Width="10*" />
@@ -40,16 +44,36 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="2" Text="Lucky Petals Lotto" Grid.Column="2" FontSize="28" Grid.ColumnSpan="6" TextAlignment="Center" Margin="15, 5, 5, 5"/>
-        <Image Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="6" Grid.RowSpan="6" Source="Assets/lotto_ticket.png"  Opacity="0.7"></Image>
-        <Button x:Name="PlayLotto" Click="PlayGame_Click" Grid.Row="7" Grid.Column="6" Grid.ColumnSpan="2" Grid.RowSpan="1" Background="Transparent"
+        <Image Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="8" Grid.RowSpan="5" Source="Assets/lotto_ticket.png"  Opacity="0.4"></Image>
+        <Button x:Name="PlayLotto" Click="PlayGame_Click" Grid.Row="9" Grid.Column="7" Grid.ColumnSpan="2" Background="Transparent"
                 Foreground="White"
                 BorderBrush="White"
                 FontSize="20"
                 FontWeight="Bold"
-                Content="Play" HorizontalAlignment="Stretch"/>
-        <TextBlock Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="3">Enter number of rows</TextBlock>
-        <TextBox  Grid.Row="7" Grid.Column="5"/>
-        <TextBlock x:Name="TextBlockTicket" TextWrapping="Wrap" FontSize="16" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="4" Grid.RowSpan="5" Foreground="Black"/>
+                Content="Play" HorizontalAlignment="Stretch"
+                Margin="4, 2, 2, 2"
+                />
+        <TextBlock Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="4">Enter number of rows</TextBlock>
+        <TextBlock x:Name="TextBlockTicket" TextWrapping="Wrap" FontSize="16" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="8" Grid.RowSpan="6" Foreground="Black"/>
+        <ComboBox x:Name="RowsComboBox" Grid.Row="7" Grid.Column="5" Grid.ColumnSpan="2" PlaceholderText="Select Rows">
+            <ComboBoxItem Content="1"/>
+            <ComboBoxItem Content="2"/>
+            <ComboBoxItem Content="3"/>
+            <ComboBoxItem Content="4"/>
+            <ComboBoxItem Content="5"/>
+            <ComboBoxItem Content="6"/>
+            <ComboBoxItem Content="7"/>
+            <ComboBoxItem Content="8"/>
+            <ComboBoxItem Content="9"/>
+            <ComboBoxItem Content="10"/>
+            <ComboBoxItem Content="11"/>
+            <ComboBoxItem Content="12"/>
+        </ComboBox>
+        <Popup x:Name="WinningsPopup" IsOpen="False" Width="300" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="38,81,0,0" Grid.Row="2" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="7">
+            <Border Background="Black" BorderBrush="Black" BorderThickness="2">
+                <TextBlock x:Name="WinningsTextBlock" Text="Congratulations! You won $0." VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Border>
+        </Popup>
 
 
     </Grid>

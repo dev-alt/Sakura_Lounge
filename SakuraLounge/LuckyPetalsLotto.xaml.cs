@@ -15,14 +15,12 @@ using Windows.UI.Xaml.Navigation;
 using SakuraLounge.Classes;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace SakuraLounge
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class LuckyPetalsLotto : Page
     {
+        private ContentDialog _winningsDialog; 
+
         public LuckyPetalsLotto()
         {
             this.InitializeComponent();
@@ -30,23 +28,55 @@ namespace SakuraLounge
 
         private void PlayGame_Click(object sender, RoutedEventArgs e)
         {
-            Lotto row;
-            row = new Lotto();
-
             TextBlockTicket.Text = "";
 
-            TextBlockTicket.Text = TextBlockTicket.Text + "----------------\n";
-            TextBlockTicket.Text = TextBlockTicket.Text + "--Lotto Ticket--\n";
-            TextBlockTicket.Text = TextBlockTicket.Text + "----------------\n";
+            if (RowsComboBox.SelectedItem is ComboBoxItem selectedItem)
+            {
+                int selectedRows = int.Parse(selectedItem.Content.ToString()); // Get the selected number of rows
 
-            TextBlockTicket.Text = TextBlockTicket.Text + "--";
+                Lotto lotto = new Lotto();
+                lotto.WinningsOccurred += DisplayWinningsPopup;
+                lotto.ClearTickets();
+                int[] winningNumbers = { 5, 10, 15, 20, 25, 30 };
 
-            row.SetNumbersToZero();
-            row.GenerateNumbers();
-            row.PrintNumbers(TextBlockTicket);
+                for (int i = 0; i < selectedRows; i++)
+                {
+                    lotto.GenerateTicket(6);
+                }
 
-            
+                lotto.PrintTickets(TextBlockTicket, winningNumbers);
+            }
+            else
+            {
+                TextBlockTicket.Text = "Invalid number of rows. Please select a number.";
+            }
 
         }
+
+        // Display the winnings popup with the specified winnings amount
+        private async void DisplayWinningsPopup(int winnings)
+        {
+            // Close the existing dialog if it's open
+            if (_winningsDialog != null)
+            {
+                _winningsDialog.Hide();
+                _winningsDialog = null;
+            }
+
+            _winningsDialog = new ContentDialog
+            {
+                Title = "Congratulations!",
+                Content = $"You won ${winnings}.",
+                PrimaryButtonText = "OK"
+            };
+
+            await _winningsDialog.ShowAsync();
+        }
+
+
+        private void RowsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
+        
     }
 }
