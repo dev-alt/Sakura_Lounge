@@ -12,46 +12,93 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/sakura_background_2.png" Opacity="0.9"/>
         </Grid.Background>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition />
         </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-
         <TextBlock Grid.Row="1" Text="Drinks" Grid.Column="2" FontSize="32" Grid.ColumnSpan="3" TextAlignment="Center"/>
+
         <Button x:Name="Drink1" Click="Drink1_Click" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Image Source="Assets/Cocktail_1.png"   />
+            <Image Source="Assets/Cocktail_1.png"/>
         </Button>
+
         <Button x:Name="Drink2" Click="Drink2_Click" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Image Source="Assets/fiery_cocktail.png"   />
+            <Image Source="Assets/fiery_cocktail.png"/>
         </Button>
-        <Button x:Name="Drink3" Click="Drink1_Click" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Image Source="Assets/mojito_with_a_tropical_twist.png" />
+
+        <Button x:Name="Drink3" Click="Drink3_Click" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Image Source="Assets/mojito_with_a_tropical_twist.png"/>
         </Button>
-        <Button x:Name="Drink4" Click="Drink2_Click" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Image Source="Assets/mystical_cocktail.png"   />
+
+        <Button x:Name="Drink4" Click="Drink4_Click" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Image Source="Assets/mystical_cocktail.png"/>
         </Button>
-        <Button x:Name="Drink5" Click="Drink2_Click" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Image Source="Assets/green_tea_latte.png"   />
+
+        <Button x:Name="Drink5" Click="Drink5_Click" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Image Source="Assets/green_tea_latte.png"/>
         </Button>
-        <Button x:Name="Drink6" Click="Drink2_Click" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Image Source="Assets/martini.png"   />
+
+        <Button x:Name="Drink6" Click="Drink6_Click" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Image Source="Assets/martini.png"/>
         </Button>
+
+        <Popup x:Name="DrinkDetailsPopup" IsOpen="False">
+            <Grid Background="White" Width="300" Height="450" CornerRadius="15" Margin="30 50 10 10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="20">
+                    <TextBlock x:Name="PopupDrinkName" FontSize="24" Foreground="Black"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Margin="20,10,20,0">
+                    <TextBlock Text="Recipe:" FontSize="18" Foreground="Black"/>
+                    <TextBlock x:Name="PopupDrinkRecipe" Foreground="Black" TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Margin="20,10,20,0">
+                    <TextBlock Text="Mix:" FontSize="18" Foreground="Black"/>
+                    <TextBlock x:Name="PopupDrinkMix" Foreground="Black" TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Margin="20,10,20,0">
+                    <TextBlock Text="Mix:" FontSize="18" Foreground="Black"/>
+                    <TextBlock x:Name="PopupDrinkPrice" Foreground="Black" TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                    <Button Content="Close" Click="ClosePopup_Click" Width="100" Background="DarkRed" Foreground="White" BorderThickness="0" CornerRadius="5" Margin="0,0,10,0"/>
+                    <Button Content="Buy" Click="Buy_Click" Width="100" Background="DarkRed" Foreground="White" BorderThickness="0" CornerRadius="5"/>
+                </StackPanel>
+            </Grid>
+        </Popup>
+
+
+
+
     </Grid>
 </Page>

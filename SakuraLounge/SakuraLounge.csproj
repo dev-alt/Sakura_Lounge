@@ -122,6 +122,7 @@
     <Compile Include="BlossomAddress.xaml.cs">
       <DependentUpon>BlossomAddress.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Drink.cs" />
     <Compile Include="Classes\GenerateFortune.cs" />
     <Compile Include="Classes\Lotto.cs" />
     <Compile Include="Classes\SlotMachine.cs" />
@@ -304,6 +305,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.14</Version>
+    </PackageReference>
+    <PackageReference Include="MSTest.TestFramework">
+      <Version>3.1.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

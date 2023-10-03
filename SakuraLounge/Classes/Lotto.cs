@@ -15,7 +15,10 @@ namespace SakuraLounge.Classes
         private readonly List<int[]> _tickets; // List to store multiple tickets
         private readonly Random _randomNumber;
         public event Action<int> WinningsOccurred;
-
+        public List<int[]> GetTickets()
+        {
+            return _tickets;
+        }
 
         public Lotto()
         {
@@ -43,7 +46,7 @@ namespace SakuraLounge.Classes
                     ticket[i] = _randomNumber.Next(1, 50);
                 }
 
-                // Bubble sort to sort the ticket numbers
+                // Bubble sort for the ticket numbers
                 for (int i = 0; i < ticket.Length - 1; i++)
                 {
                     for (int j = 0; j < ticket.Length - 1 - i; j++)
@@ -118,7 +121,7 @@ namespace SakuraLounge.Classes
         /// </summary>
         /// <param name="correctNumbers">The number of correct numbers guessed.</param>
         /// <returns>The amount of winnings.</returns>
-        private int CalculateWinnings(int correctNumbers)
+        internal int CalculateWinnings(int correctNumbers)
         {
             int winnings = 0;
 
