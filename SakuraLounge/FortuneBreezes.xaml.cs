@@ -1,43 +1,61 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using SakuraLounge.Classes;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SakuraLounge
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class FortuneBreezes : Page
     {
+        private GenerateFortune fortuneGenerator;
+        private bool isAudioPaused = false;
+
         public FortuneBreezes()
         {
             this.InitializeComponent();
+            fortuneGenerator = new GenerateFortune();
+            fortuneGenerator.MediaElement = mediaElement; // Set the MediaElement property
         }
 
         private void GenerateFortune_Click(object sender, RoutedEventArgs e)
         {
-            GenerateFortune fortune;
-
-            fortune = new GenerateFortune();
-
-            fortune.Generate(FortuneBox);
-
-
-
+            // Generate the fortune and start playback
+            fortuneGenerator.Generate(FortuneBox);
+            isAudioPaused = false; // Reset the audio pause state
+            FortuneDetailsPopup.IsOpen = true;
         }
+
+        private void ClosePopup_Click(object sender, RoutedEventArgs e)
+        {
+            FortuneDetailsPopup.IsOpen = false;
+        }
+        
+        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        {
+            mediaElement.Play();
+        }
+
+        private void PauseButton_Click(object sender, RoutedEventArgs e)
+        {
+            mediaElement.Pause();
+        }
+
+        private void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            //mediaElement.Stop();
+            // Stop audio playback
+            fortuneGenerator.StopPlayback();
+            isAudioPaused = false; // Reset the audio pause state
+        }
+
+        private void Slider_ValueChanged(object sender, Windows.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
+        {
+            if (mediaElement != null)
+            {
+                // Update the volume of the MediaElement
+                mediaElement.Volume = e.NewValue;
+            }
+        }
+
     }
 }

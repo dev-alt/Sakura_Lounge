@@ -8,6 +8,28 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <!-- Define the ButtonStyle here -->
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FF007ACC" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Margin" Value="0,0,10,0" />
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/Fortune_teller.png"/>
@@ -25,21 +47,54 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="GenerateFortune" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="8"
-                Content="Unveil Your Destiny" Foreground="white" 
-                BorderBrush="white" Click="GenerateFortune_Click" FontSize="24" BorderThickness="4" CornerRadius="2"/>
-        <TextBlock  Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="5" Grid.RowSpan="2" x:Name="FortuneBox" TextWrapping="Wrap" FontSize="16" Foreground="#FFD7E6DE" />
+        <Popup x:Name="FortuneDetailsPopup" IsOpen="False">
+            <Grid Background="White" Opacity="0.8" Width="300" MaxHeight="400" CornerRadius="15" Margin="20 100 10 20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Add a Border to create a close button -->
+                <Border Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,0">
+                    <Button Content="X" Foreground="Black" Background="Transparent" FontSize="18" Width="30" Height="30" Click="ClosePopup_Click" />
+                </Border>
+
+                <TextBlock x:Name="FortuneBox" FontSize="18" Foreground="Black" TextWrapping="Wrap" Margin="20,20,20,0"/>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,10,0,0">
+                    <Button Content="Play" Click="PlayButton_Click" Style="{StaticResource ButtonStyle}" />
+                    <Button Content="Pause" Click="PauseButton_Click" Style="{StaticResource ButtonStyle}" />
+                    <Button Content="Stop" Click="StopButton_Click" Style="{StaticResource ButtonStyle}" />
+                    <Slider Value="{Binding ElementName=mediaElement, Path=Volume}" Minimum="0" Maximum="1" Width="100" VerticalAlignment="Center"
+                            ValueChanged="Slider_ValueChanged" StepFrequency="0.1" />
+
+                </StackPanel>
+            </Grid>
+        </Popup>
+ 
+        <MediaElement x:Name="mediaElement" AutoPlay="False" />
+
+
+        <Button x:Name="GenerateFortune" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="8" Margin="30 0 10 0"
+                Content="Unveil Your Destiny" Foreground="White" 
+                Background="#6B238E" Click="GenerateFortune_Click" FontSize="24" BorderThickness="0" CornerRadius="10" Width="250" Height="60">
+            <Button.FontFamily>
+                <FontFamily>Segoe UI Symbol</FontFamily>
+            </Button.FontFamily>
+        </Button>
+
+
 
     </Grid>
 </Page>

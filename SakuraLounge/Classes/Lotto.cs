@@ -101,7 +101,7 @@ namespace SakuraLounge.Classes
                     if (number != ticket.Last())
                     {
                         var spaceRun = new Run();
-                        spaceRun.Text = " ";
+                        spaceRun.Text = "  ";
                         outputTextBlock.Inlines.Add(spaceRun);
                     }
                 }
