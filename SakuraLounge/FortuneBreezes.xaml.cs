@@ -42,9 +42,7 @@ namespace SakuraLounge
 
         private void StopButton_Click(object sender, RoutedEventArgs e)
         {
-            //mediaElement.Stop();
-            // Stop audio playback
-            fortuneGenerator.StopPlayback();
+            mediaElement.Stop();
             isAudioPaused = false; // Reset the audio pause state
         }
 

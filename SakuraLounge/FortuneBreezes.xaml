@@ -42,8 +42,6 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -86,7 +84,7 @@
         <MediaElement x:Name="mediaElement" AutoPlay="False" />
 
 
-        <Button x:Name="GenerateFortune" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="8" Margin="30 0 10 0"
+        <Button x:Name="GenerateFortune" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="8" Margin="30 0 10 0"
                 Content="Unveil Your Destiny" Foreground="White" 
                 Background="#6B238E" Click="GenerateFortune_Click" FontSize="24" BorderThickness="0" CornerRadius="10" Width="250" Height="60">
             <Button.FontFamily>

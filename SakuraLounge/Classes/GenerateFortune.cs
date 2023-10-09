@@ -12,13 +12,13 @@ namespace SakuraLounge.Classes
 {
      internal class GenerateFortune
     {
-        private Random random = new Random();
-        private SpeechSynthesizer synth = new SpeechSynthesizer();
-        private IAsyncOperation<SpeechSynthesisStream> synthesisStreamOperation = null;
+        private readonly Random random = new Random();
+        private readonly SpeechSynthesizer synth = new SpeechSynthesizer();
+
         public MediaElement MediaElement { get; set; } // Property to store the MediaElement
         private double previousVolume = 1.0; // Initialize with the default maximum volume
 
-        string[] timeArray = {
+        readonly string[] timeArray = {
             "thirty minutes",
             "an hour",
             "eight hours",
@@ -30,7 +30,7 @@ namespace SakuraLounge.Classes
             "a decade"
         };
 
-        string[] aspectArray = {
+        readonly string[] aspectArray = {
             "finances",
             "love life",
             "career prospects",
@@ -38,7 +38,7 @@ namespace SakuraLounge.Classes
             "relationships"
         };
 
-        string[] effectArray = {
+        readonly string[] effectArray = {
             "fall apart",
             "exceed your expectation",
             "become awkward in an unexpected way",
@@ -47,7 +47,7 @@ namespace SakuraLounge.Classes
             "come to a positive outcome"
         };
 
-        string[] personaArray = {
+        readonly string[] personaArray = {
             "man",
             "boy",
             "woman",
@@ -59,7 +59,7 @@ namespace SakuraLounge.Classes
             "relative"
         };
 
-        string[] featureArray = {
+        readonly string[] featureArray = {
             "pink hair",
             "a broken golden chain",
             "scary eyes",
@@ -68,7 +68,7 @@ namespace SakuraLounge.Classes
             "silver feet"
         };
 
-        string[] consequenceArray = {
+        readonly string[] consequenceArray = {
             "avoid looking at directly",
             "sing a sad song with",
             "stop and talk to",
@@ -120,50 +120,7 @@ namespace SakuraLounge.Classes
             }
         }
 
-        public void StopPlayback()
-        {
-            if (MediaElement != null)
-            {
-                MediaElement.Stop();
-            }
-        }
 
-        public void PausePlayback()
-        {
-            if (MediaElement != null)
-            {
-                MediaElement.Pause();
-            }
-        }
-
-        public void ResumePlayback()
-        {
-            if (MediaElement != null)
-            {
-                MediaElement.Play();
-            }
-        }
-
-        public void ToggleMute()
-        {
-            if (MediaElement != null)
-            {
-                if (MediaElement.IsMuted)
-                {
-                    // Unmute: Restore the previous volume
-                    MediaElement.Volume = previousVolume;
-                }
-                else
-                {
-                    // Mute: Store the current volume and set it to 0
-                    previousVolume = MediaElement.Volume;
-                    MediaElement.Volume = 0.0;
-                }
-
-                // Toggle the IsMuted property
-                MediaElement.IsMuted = !MediaElement.IsMuted;
-            }
-        }
 
     }
 }

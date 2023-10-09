@@ -17,8 +17,10 @@ using SakuraLounge.Classes;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 namespace SakuraLounge
 {
+
     public sealed partial class LuckyPetalsLotto : Page
     {
+
         private ContentDialog _winningsDialog; 
 
         public LuckyPetalsLotto()
@@ -53,8 +55,10 @@ namespace SakuraLounge
 
         }
 
+
+
         // Display the winnings popup with the specified winnings amount
-        private async void DisplayWinningsPopup(int winnings)
+            private async void DisplayWinningsPopup(int winnings)
         {
             // Close the existing dialog if it's open
             if (_winningsDialog != null)

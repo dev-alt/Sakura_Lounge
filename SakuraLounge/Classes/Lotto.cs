@@ -15,6 +15,7 @@ namespace SakuraLounge.Classes
         private readonly List<int[]> _tickets; // List to store multiple tickets
         private readonly Random _randomNumber;
         public event Action<int> WinningsOccurred;
+
         public List<int[]> GetTickets()
         {
             return _tickets;
@@ -76,44 +77,51 @@ namespace SakuraLounge.Classes
         {
             foreach (var ticket in _tickets)
             {
-                int correctNumbers = ticket.Count(num => winningNumbers.Contains(num));
-
+                int correctNumbers = ticket.Count(winningNumbers.Contains);
                 int winnings = CalculateWinnings(correctNumbers);
 
-                foreach (var number in ticket)
+                // Start the ticket with "--" to indicate the start
+                outputTextBlock.Inlines.Add(new Run { Text = "-- " });
+
+                for (int i = 0; i < ticket.Length; i++)
                 {
-                    var run = new Run();
-                    run.Text = number.ToString();
+                    string numberText = ticket[i] < 10 ? "0" + ticket[i].ToString() : ticket[i].ToString();
 
-                    if (number < 10)
+                    // Add leading space for single-digit numbers
+                    if (ticket[i] < 10)
                     {
-                        run.Text = " " + run.Text;
+                        numberText = " " + numberText;
                     }
 
-                    // Check if the number is a winning number and set the foreground color accordingly
-                    if (winningNumbers.Contains(number))
+                    // Highlight winning numbers in yellow
+                    if (winningNumbers.Contains(ticket[i]))
                     {
-                        run.Foreground = new SolidColorBrush(Colors.Yellow); // Highlight as a winning number
+                        var run = new Run { Text = numberText };
+                        run.Foreground = new SolidColorBrush(Colors.DarkRed);
+                        outputTextBlock.Inlines.Add(run);
+                    }
+                    else
+                    {
+                        // Add non-winning numbers in regular color
+                        outputTextBlock.Inlines.Add(new Run { Text = numberText });
                     }
 
-                    outputTextBlock.Inlines.Add(run);
-
-                    if (number != ticket.Last())
+                    // Add comma and space except for the last number
+                    if (i < ticket.Length - 1)
                     {
-                        var spaceRun = new Run();
-                        spaceRun.Text = "  ";
-                        outputTextBlock.Inlines.Add(spaceRun);
+                        outputTextBlock.Inlines.Add(new Run { Text = " " });
                     }
                 }
 
-                if (winnings > 0)
-                {
-                    WinningsOccurred?.Invoke(winnings);
-                }
+                // End the ticket with "--" to indicate the end
+                outputTextBlock.Inlines.Add(new Run { Text = " --" });
 
-                outputTextBlock.Inlines.Add(new LineBreak()); // Add a line break between tickets
+                // Add line break between tickets
+                outputTextBlock.Inlines.Add(new LineBreak());
             }
         }
+
+
 
 
         /// <summary>
@@ -123,7 +131,7 @@ namespace SakuraLounge.Classes
         /// <returns>The amount of winnings.</returns>
         internal int CalculateWinnings(int correctNumbers)
         {
-            int winnings = 0;
+            int winnings;
 
             switch (correctNumbers)
             {
