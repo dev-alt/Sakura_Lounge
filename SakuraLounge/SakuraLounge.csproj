@@ -122,9 +122,12 @@
     <Compile Include="BlossomAddress.xaml.cs">
       <DependentUpon>BlossomAddress.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\DiceGame.cs" />
+    <Compile Include="Classes\Dragon.cs" />
     <Compile Include="Classes\Drink.cs" />
     <Compile Include="Classes\GenerateFortune.cs" />
     <Compile Include="Classes\Lotto.cs" />
+    <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\SlotMachine.cs" />
     <Compile Include="Classes\Wheel.cs" />
     <Compile Include="CulturalTreasures.xaml.cs">
@@ -175,6 +178,12 @@
     <Content Include="Assets\.png" />
     <Content Include="Assets\coins.png" />
     <Content Include="Assets\coins.wav" />
+    <Content Include="Assets\dice_1.png" />
+    <Content Include="Assets\dice_2.png" />
+    <Content Include="Assets\dice_3.png" />
+    <Content Include="Assets\dice_4.png" />
+    <Content Include="Assets\dice_5.png" />
+    <Content Include="Assets\dice_6.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />

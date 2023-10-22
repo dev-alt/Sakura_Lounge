@@ -65,19 +65,31 @@
         </Grid.ColumnDefinitions>
 
         <!-- Title -->
-        <TextBlock Grid.Row="1" Text="Lucky Petals Lotto" Grid.Column="2" FontSize="32" FontWeight="Bold" Grid.ColumnSpan="6" TextAlignment="Center" Margin="35, 30, 15, 10"/>
+        <TextBlock Grid.Row="1" Text="Lucky Petals Lotto" Grid.Column="1" FontSize="28" FontWeight="Bold" Grid.ColumnSpan="6" TextAlignment="Center" Margin="35, 30, 15, 10"/>
 
         <!-- Background Image -->
-        <Image Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="7" Grid.RowSpan="3" Source="Assets/lotto_ticket.png" Opacity="0.4" Stretch="UniformToFill"/>
+        <Image Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="7" Grid.RowSpan="3" Source="Assets/lotto_ticket.png" Opacity="0.2" Stretch="UniformToFill"/>
         <!-- TextBlockTicket for displaying rows -->
         <ScrollViewer Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="8" Grid.RowSpan="3" VerticalAlignment="Stretch">
-            <TextBlock x:Name="TextBlockTicket" TextWrapping="Wrap" FontSize="22" FontFamily="Droid Sans Mono" Foreground="Yellow" TextAlignment="Center" LineHeight="28" />
+            <TextBlock x:Name="TextBlockTicket" 
+                       TextWrapping="Wrap" 
+                       FontSize="22" 
+                       FontFamily="Droid Sans Mono" 
+                       Foreground="Black" 
+                       TextAlignment="Center" 
+                       LineHeight="28" >
+                <TextBlock.RenderTransform>
+                    <TranslateTransform X="2" Y="2" />
+                </TextBlock.RenderTransform>
+            </TextBlock>
         </ScrollViewer>
 
+
+
         <!-- StackPanel containing ComboBox and Play Button -->
-        <StackPanel Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,10,0,0">
+        <StackPanel Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
             <!-- RowsComboBox -->
-            <ComboBox x:Name="RowsComboBox" PlaceholderText="Select Rows" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Stretch" Margin="0 0 20 0">
+            <ComboBox x:Name="RowsComboBox" PlaceholderText="Select Rows" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Stretch" Margin="0 0 20 00">
                 <ComboBoxItem Content="1"/>
                 <ComboBoxItem Content="2"/>
                 <ComboBoxItem Content="3"/>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
+using Windows.UI.Text;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Media;
@@ -14,7 +15,10 @@ namespace SakuraLounge.Classes
     {
         private readonly List<int[]> _tickets; // List to store multiple tickets
         private readonly Random _randomNumber;
+        private int totalWinnings; // Track total winnings
         public event Action<int> WinningsOccurred;
+        public event Action<int> TotalWinningsUpdated; // Event for total winnings update
+
 
         public List<int[]> GetTickets()
         {
@@ -25,6 +29,7 @@ namespace SakuraLounge.Classes
         {
             _tickets = new List<int[]>();
             _randomNumber = new Random(DateTime.Now.Millisecond);
+            totalWinnings = 0; 
         }
 
         /// <summary>
@@ -41,10 +46,18 @@ namespace SakuraLounge.Classes
                 }
 
                 int[] ticket = new int[ticketSize];
+                HashSet<int> usedNumbers = new HashSet<int>();
 
                 for (int i = 0; i < ticketSize; i++)
                 {
-                    ticket[i] = _randomNumber.Next(1, 50);
+                    int randomNumber;
+                    do
+                    {
+                        randomNumber = _randomNumber.Next(1, 51); // Generates a random number between 1 and 50
+                    } while (usedNumbers.Contains(randomNumber));
+
+                    ticket[i] = randomNumber;
+                    usedNumbers.Add(randomNumber);
                 }
 
                 // Bubble sort for the ticket numbers
@@ -54,7 +67,6 @@ namespace SakuraLounge.Classes
                     {
                         if (ticket[j] > ticket[j + 1])
                         {
-                            // Swap ticket[j] and ticket[j + 1]
                             (ticket[j], ticket[j + 1]) = (ticket[j + 1], ticket[j]);
                         }
                     }
@@ -75,10 +87,19 @@ namespace SakuraLounge.Classes
         /// <param name="winningNumbers">The array of winning numbers.</param>
         public void PrintTickets(TextBlock outputTextBlock, int[] winningNumbers)
         {
+            int totalWinnings = 0;
+
+            outputTextBlock.Inlines.Add(new Run { Text = "--------------------------" });
+            outputTextBlock.Inlines.Add(new LineBreak());
+
             foreach (var ticket in _tickets)
             {
                 int correctNumbers = ticket.Count(winningNumbers.Contains);
                 int winnings = CalculateWinnings(correctNumbers);
+
+                // Accumulate winnings to the total winnings for this draw
+                totalWinnings += winnings;
+
 
                 // Start the ticket with "--" to indicate the start
                 outputTextBlock.Inlines.Add(new Run { Text = "-- " });
@@ -97,8 +118,10 @@ namespace SakuraLounge.Classes
                     if (winningNumbers.Contains(ticket[i]))
                     {
                         var run = new Run { Text = numberText };
-                        run.Foreground = new SolidColorBrush(Colors.DarkRed);
-                        outputTextBlock.Inlines.Add(run);
+                        run.Foreground = new SolidColorBrush(Colors.DarkBlue); 
+                        var underlinedRun = new Underline();
+                        underlinedRun.Inlines.Add(run);
+                        outputTextBlock.Inlines.Add(underlinedRun);
                     }
                     else
                     {
@@ -118,10 +141,31 @@ namespace SakuraLounge.Classes
 
                 // Add line break between tickets
                 outputTextBlock.Inlines.Add(new LineBreak());
+
+
+                if (winnings > 0)
+                {
+                    WinningsOccurred?.Invoke(winnings);
+                }
             }
+
+            // Add a line of dashes after the entire ticket block
+            outputTextBlock.Inlines.Add(new Run { Text = "---------------------------" });
+            outputTextBlock.Inlines.Add(new LineBreak());
+
+            // Notify of the total winnings for this draw
+            TotalWinningsUpdated?.Invoke(totalWinnings);
         }
 
+        public int GetTotalWinnings()
+        {
+            return totalWinnings;
+        }
 
+        public void ClearTotalWinnings()
+        {
+            totalWinnings = 0;
+        }
 
 
         /// <summary>

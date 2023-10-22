@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -86,6 +87,7 @@ namespace SakuraLounge.Classes
 
         public string GenerateFortuneMessage()
         {
+            Debug.WriteLine("Test");
             // Generate random indices for each array
             int timeIndex = random.Next(0, timeArray.Length);
             int aspectIndex = random.Next(0, aspectArray.Length);
@@ -108,7 +110,7 @@ namespace SakuraLounge.Classes
                 // Hook up an event handler to stop playback when it's completed
                 MediaElement.MediaEnded += (sender, args) =>
                 {
-                    // Dispose the MediaElement when playback ends
+                    // End the MediaElement when playback ends
                     ((MediaElement)sender).Stop();
                     ((MediaElement)sender).MediaEnded -= null; // Remove the event handler
                 };

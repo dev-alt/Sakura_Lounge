@@ -42,79 +42,64 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
+        <!-- Button for "OurStory" in the upper right corner -->
+        <Button Click="OurStory_Click" Background="Transparent" Margin="0, 15, 0, 0"
+                FontSize="20" FontWeight="Bold" Padding="15,10" Grid.Row="1" Grid.Column="8" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Image Source="/Assets/My project.png" Width="60" Height="60" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </Button>
 
-        <!-- Add the StackPanel containing the hero section and buttons -->
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="12" Grid.ColumnSpan="11" 
-                    HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
-            <!-- Hero section with cherry blossom image -->
-            <!--<Image Source="Assets/cherry_blossom_hero.jpg" Width="300" Height="200" Margin="0,0,0, -120"/>-->
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.RowSpan="9" Grid.ColumnSpan="10" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20" BorderBrush="White">
 
-            <!-- Buttons to each section -->
-            <Button Content="Our Story" Click="OurStory_Click"
-                    Background="Transparent"
-                    Foreground="White"
-                    BorderBrush="White"
-                    BorderThickness="2"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Padding="15,10"/>
-            <Button Content="Blossom Address" Click="BlossomAddress_Click"        Background="Transparent"
-                    Foreground="White"
-                    BorderBrush="White"
-                    BorderThickness="2"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Padding="15,10"/>
-            <Button Content="Dice Garden" Click="DiceGarden_Click"        Background="Transparent"
-                    Foreground="White"
-                    BorderBrush="White"
-                    BorderThickness="2"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Padding="15,10"/>
-            <Button Content="Lucky Petals Lotto" Click="LuckyPetalsLotto_Click"        Background="Transparent"
-                    Foreground="White"
-                    BorderBrush="White"
-                    BorderThickness="2"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Padding="15,10"/>
-            <Button Content="Sakura Sips" Click="SakuraSips_Click"        Background="Transparent"
-                    Foreground="White"
-                    BorderBrush="White"
-                    BorderThickness="2"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Padding="15,10"/>
-            <Button Content="Fortune Breezes" Click="FortuneBreezes_Click"        Background="Transparent"
-                    Foreground="White"
-                    BorderBrush="White"
-                    BorderThickness="2"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Padding="15,10"/>
-            <Button Content="Games of the Orient" Click="GamesOfTheOrient_Click"        Background="Transparent"
-                    Foreground="White"
-                    BorderBrush="White"
-                    BorderThickness="2"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Padding="15,10"/>
-            <Button Content="Cultural Treasures" Click="CulturalTreasures_Click"        Background="Transparent"
-                    Foreground="White"
-                    BorderBrush="White"
-                    BorderThickness="2"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Padding="15,10"/>
-            <Button Content="Festive Seasons" Click="FestiveSeasons_Click"         Background="Transparent"
-                    Foreground="White"
-                    BorderBrush="White"
-                    BorderThickness="2"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Padding="15,10"/>
-        </StackPanel>
+                <!-- Button for "Blossom Address" -->
+            <Button Click="BlossomAddress_Click" Background="Transparent" BorderBrush="White" BorderThickness="2" CornerRadius="24"
+                    FontSize="20" FontWeight="Bold" Padding="15,10">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Assets/Map.png" Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="Blossom Address" Foreground="White"/>
+                </StackPanel>
+            </Button>
+            <!-- Button for "Dice Garden" -->
+            <Button Click="DiceGarden_Click" Background="Transparent" BorderBrush="White" BorderThickness="2" CornerRadius="24"
+                    FontSize="20" FontWeight="Bold" Padding="15,10">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Assets/dice_hero.png" Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="Dice Garden" Foreground="White"/>
+                </StackPanel>
+            </Button>
+            <!-- Button for "Lucky Petals Lotto" -->
+            <Button Click="LuckyPetalsLotto_Click" Background="Transparent" BorderBrush="White" BorderThickness="2" CornerRadius="24"
+                    FontSize="20" FontWeight="Bold" Padding="15,10">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Assets/lotto_ticket.png" Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="Lucky Petals Lotto" Foreground="White"/>
+                </StackPanel>
+            </Button>
+            <!-- Button for "Sakura Sips" -->
+            <Button Click="SakuraSips_Click" Background="Transparent" BorderBrush="White" BorderThickness="2" CornerRadius="24"
+                    FontSize="20" FontWeight="Bold" Padding="15,10">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Assets/martini.png" Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="Sakura Sips" Foreground="White"/>
+                </StackPanel>
+            </Button>
+            <!-- Button with an image and text for "Fortune Breezes" -->
+            <Button Click="FortuneBreezes_Click" Background="Transparent" BorderBrush="White" BorderThickness="2" CornerRadius="24"
+                    FontSize="20" FontWeight="Bold" Padding="15,10">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Assets/Fortune_teller.png" Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="Fortune Breezes" Foreground="White"/>
+                </StackPanel>
+            </Button>
+            <!-- Button with an image and text for "Cultural Treasures" -->
+            <Button Click="CulturalTreasures_Click" Background="Transparent" BorderBrush="White" BorderThickness="2" CornerRadius="24"
+                    FontSize="20" FontWeight="Bold" Padding="15,10">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Assets/slot_machine.png" Width="20" Height="20" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="Cultural Treasures" Foreground="White"/>
+                </StackPanel>
+            </Button>
+            </StackPanel>
 
         <!-- Overlay to make the navigation bar more visible -->
         <Rectangle Grid.Column="0" Grid.Row="11"  Grid.ColumnSpan="16" Canvas.ZIndex="-1" Fill="White" Opacity="0.5" />

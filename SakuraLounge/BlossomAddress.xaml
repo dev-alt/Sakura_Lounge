@@ -5,14 +5,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Custom="using:Windows.UI.Xaml.Controls.Maps"
+    xmlns:geolocation="using:Windows.Devices.Geolocation"
     x:Class="SakuraLounge.BlossomAddress"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/Assets/Map.png"/>
-        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
@@ -37,7 +35,57 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <Custom:MapControl Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="6" Grid.RowSpan="4"/>
+        <Custom:MapControl x:Name="MyMap" 
+                                   Grid.Column="0" Grid.Row="0" Grid.RowSpan="9" Grid.ColumnSpan="10" 
+                                   MapServiceToken="GQ9oX3FEQkKuldfd5hUf~cN2J_UUyU3aJE30151mujg~AkelcchueJV9hoUFaL3kexDVg9KHFE6ZC7wvshMyk0rqkO65rvtcltUzXXFZ-lNd"  
+                                   Style="Terrain"
+                                   Tapped="MyMap_Tapped"
+                                   ZoomLevel="8" PointerPressed="MyMap_PointerPressed">
 
+                
+        </Custom:MapControl>
+        <ComboBox x:Name="LocationComboBox" HorizontalAlignment="Center" 
+                  VerticalAlignment="Top" SelectionChanged="LocationComboBox_SelectionChanged"
+                  Grid.Column="8"
+                  Grid.Row="1"
+                  >
+            <ComboBox.Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="Background" Value="Transparent" />
+                </Style>
+            </ComboBox.Style>
+            <ComboBoxItem Content="Auckland" Tag="Auckland" />
+            <ComboBoxItem Content="Wellington" Tag="Wellington" />
+            <ComboBoxItem Content="Christchurch" Tag="Christchurch" />
+            <ComboBoxItem Content="Dunedin" Tag="Dunedin" />
+            <ComboBoxItem Content="Hamilton" Tag="Hamilton" />
+        </ComboBox>
+
+        <Popup x:Name="InfoPopup" IsOpen="False" Grid.Row="1" Grid.Column="2">
+            <Grid Background="White" Width="170" Height="200" CornerRadius="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Button Content="X" Click="CloseInfoPopup_Click" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" Background="DarkRed" Foreground="White" BorderThickness="0" CornerRadius="5" Margin="0,10,10,0" />
+
+                <StackPanel Grid.Row="0" Grid.Column="0" Margin="20,10,20,0">
+                    <TextBlock x:Name="CityName" FontSize="18" Foreground="Black" />
+                </StackPanel>
+
+                <Image Grid.Row="1" Grid.Column="0" Source="Assets/bar_background.png" Width="150" Height="150" />
+            </Grid>
+        </Popup>
+
+
+
+
+
+        <AppBarButton Icon="Target" Label="Recenter Map" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" Click="RecenterMapButton_Click" />
     </Grid>
 </Page>
