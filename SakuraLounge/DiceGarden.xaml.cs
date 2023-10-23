@@ -39,53 +39,79 @@ namespace SakuraLounge
 
         private void DiceRoll_Click(object sender, RoutedEventArgs e)
         {
-            if (playerAttacks < 3)
+            int pointsToDeduct = 10; 
+            int currentScore = ScoreManager.GetScore();
+
+            if (currentScore >= pointsToDeduct)
             {
-                diceGame.RollDice();
-                UpdateDiceImages();
-                playerAttacks++;
 
-                // Player's turn
-                int damageTotal = 0;
-                int strIncrease = 0;
-                int powerIncrease = 0;
-                int luckIncrease = 0;
-
-                for (int i = 0; i < 3; i++)
+                if (playerAttacks < 3)
                 {
-                    int playerAttack = player.Strength + diceGame.Roll1;
+                    diceGame.RollDice();
+                    UpdateDiceImages();
+                    playerAttacks++;
 
-                    int dragonAttack = dragon.Strength; // Dragon's attack power
+                    // Player's turn
+                    int damageTotal = 0;
+                    int strIncrease = 0;
+                    int powerIncrease = 0;
+                    int luckIncrease = 0;
 
-                    // Calculate combat outcomes for each die
-                    int playerDamage = Math.Max(playerAttack - dragon.Luck, 0);
-                    damageTotal += playerDamage;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        int playerAttack = player.Strength + diceGame.Roll1;
 
-                    // Modify player attributes based on the dice rolls
-                    if (i == 0)
-                    {
-                        strIncrease = diceGame.Roll1;
+                        int dragonAttack = dragon.Strength; // Dragon's attack power
+
+                        // Calculate combat outcomes for each die
+                        int playerDamage = Math.Max(playerAttack - dragon.Luck, 0);
+                        damageTotal += playerDamage;
+
+                        // Modify player attributes based on the dice rolls
+                        if (i == 0)
+                        {
+                            strIncrease = diceGame.Roll1;
+                        }
+                        else if (i == 1)
+                        {
+                            powerIncrease = diceGame.Roll2;
+                        }
+                        else if (i == 2)
+                        {
+                            luckIncrease = diceGame.Roll3;
+                        }
                     }
-                    else if (i == 1)
-                    {
-                        powerIncrease = diceGame.Roll2;
-                    }
-                    else if (i == 2)
-                    {
-                        luckIncrease = diceGame.Roll3;
-                    }
+
+                    // Update player's attributes
+                    player.Strength += strIncrease;
+                    player.Power += powerIncrease;
+                    player.Luck += luckIncrease;
+
+                    // Update dragon's health
+                    dragon.Health -= damageTotal;
+                    damageDisplay.Text += $"Hit {playerAttacks}: Damage: {damageTotal}\n";
+                    CheckDragonStatus();
                 }
-
-                // Update player's attributes
-                player.Strength += strIncrease;
-                player.Power += powerIncrease;
-                player.Luck += luckIncrease;
-
-                // Update dragon's health
-                dragon.Health -= damageTotal;
-                damageDisplay.Text += $"Hit {playerAttacks}: Damage: {damageTotal}\n";
-                CheckDragonStatus();
             }
+            else
+            {
+                ShowNotEnoughPointsMessage();
+            }
+        }
+
+        private async void ShowNotEnoughPointsMessage()
+        {
+            int currentScore = ScoreManager.GetScore(); // Retrieve the user's current score
+            string message = $"You don't have enough points to play. You have {currentScore} points.";
+
+            ContentDialog notEnoughPointsDialog = new ContentDialog
+            {
+                Title = "Not Enough Points",
+                Content = message,
+                CloseButtonText = "OK"
+            };
+
+            ContentDialogResult result = await notEnoughPointsDialog.ShowAsync();
         }
 
         private void CheckDragonStatus()

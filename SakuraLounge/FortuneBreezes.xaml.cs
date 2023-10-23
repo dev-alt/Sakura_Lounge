@@ -19,10 +19,38 @@ namespace SakuraLounge
 
         private void GenerateFortune_Click(object sender, RoutedEventArgs e)
         {
-            // Generate the fortune and start playback
-            fortuneGenerator.Generate(FortuneBox);
-            isAudioPaused = false; // Reset the audio pause state
-            FortuneDetailsPopup.IsOpen = true;
+
+            int pointsToDeduct = 5;
+            int currentScore = ScoreManager.GetScore();
+            if (currentScore >= pointsToDeduct)
+            {
+
+                ScoreManager.AddScore(-pointsToDeduct); // Subtract 50 points from the user's score
+
+                // Generate the fortune and start playback
+                fortuneGenerator.Generate(FortuneBox);
+                isAudioPaused = false; // Reset the audio pause state
+                FortuneDetailsPopup.IsOpen = true;
+            }
+            else
+            {
+                ShowNotEnoughPointsMessage();
+            }
+        }
+
+        private async void ShowNotEnoughPointsMessage()
+        {
+            int currentScore = ScoreManager.GetScore(); // Retrieve the user's current score
+            string message = $"You don't have enough points to play. You have {currentScore} points.";
+
+            ContentDialog notEnoughPointsDialog = new ContentDialog
+            {
+                Title = "Not Enough Points",
+                Content = message,
+                CloseButtonText = "OK"
+            };
+
+            ContentDialogResult result = await notEnoughPointsDialog.ShowAsync();
         }
 
         private void ClosePopup_Click(object sender, RoutedEventArgs e)

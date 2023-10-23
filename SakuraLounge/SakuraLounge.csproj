@@ -129,7 +129,6 @@
     <Compile Include="Classes\Lotto.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\SlotMachine.cs" />
-    <Compile Include="Classes\Wheel.cs" />
     <Compile Include="CulturalTreasures.xaml.cs">
       <DependentUpon>CulturalTreasures.xaml</DependentUpon>
     </Compile>

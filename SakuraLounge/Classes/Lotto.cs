@@ -19,7 +19,6 @@ namespace SakuraLounge.Classes
         public event Action<int> WinningsOccurred;
         public event Action<int> TotalWinningsUpdated; // Event for total winnings update
 
-
         public List<int[]> GetTickets()
         {
             return _tickets;
@@ -29,7 +28,8 @@ namespace SakuraLounge.Classes
         {
             _tickets = new List<int[]>();
             _randomNumber = new Random(DateTime.Now.Millisecond);
-            totalWinnings = 0; 
+            totalWinnings = 0;
+
         }
 
         /// <summary>
@@ -180,22 +180,26 @@ namespace SakuraLounge.Classes
             switch (correctNumbers)
             {
                 case 3:
-                    winnings = 1; // $1 for 3 correct numbers
+                    winnings = 10; // $1 for 3 correct numbers
                     break;
                 case 4:
-                    winnings = 5; // $5 for 4 correct numbers
+                    winnings = 50; // $5 for 4 correct numbers
                     break;
                 case 5:
-                    winnings = 150; // $150 for 5 correct numbers
+                    winnings = 1500; // $150 for 5 correct numbers
                     break;
                 case 6:
-                    winnings = 300; // $300 for all 6 correct numbers
+                    winnings = 3000; // $3000 for all 6 correct numbers
                     break;
                 default:
                     winnings = 0; // No winnings for less than 3 correct numbers
                     break;
             }
-
+            if (winnings > 0)
+            {
+                // Add the winnings to the user's score
+                ScoreManager.AddScore(winnings);
+            }
             return winnings;
         }
 

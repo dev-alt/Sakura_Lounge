@@ -77,11 +77,47 @@ namespace SakuraLounge
         {
             DrinkDetailsPopup.IsOpen = false;
         }
-
-
-        private void Buy_Click(object sender, RoutedEventArgs e)
+        private async void ShowNotEnoughPointsMessage()
         {
-            throw new NotImplementedException();
+            int currentScore = ScoreManager.GetScore(); 
+            string message = $"You don't have enough Money. You have ${currentScore}";
+
+            ContentDialog notEnoughPointsDialog = new ContentDialog
+            {
+                Title = "Not Enough money",
+                Content = message,
+                CloseButtonText = "OK"
+            };
+
+            ContentDialogResult result = await notEnoughPointsDialog.ShowAsync();
         }
+
+        private async void Buy_Click(object sender, RoutedEventArgs e)
+        {
+            int drinkPrice = 10; // Change this to the actual price of the drink.
+            int currentScore = ScoreManager.GetScore();
+
+            if (currentScore >= drinkPrice)
+            {
+                // Deduct the price of the drink from the user's score.
+                ScoreManager.AddScore(-drinkPrice);
+                ContentDialog thankYouDialog = new ContentDialog
+                {
+                    Title = "Purchase Successful",
+                    Content = "Thank you for your purchase!",
+                    CloseButtonText = "OK"
+                };
+
+                await thankYouDialog.ShowAsync();
+                DrinkDetailsPopup.IsOpen = false;
+
+            }
+            else
+            {
+                // Handle the case where the user doesn't have enough money to buy the drink.
+                ShowNotEnoughPointsMessage();
+            }
+        }
+
     }
 }

@@ -22,6 +22,7 @@ namespace SakuraLounge
     public sealed partial class CulturalTreasures : Page
     {
         private SlotMachine slotMachine;
+ 
 
         public CulturalTreasures()
         {

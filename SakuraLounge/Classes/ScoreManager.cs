@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
@@ -7,8 +8,8 @@ namespace SakuraLounge
 {
     public class ScoreManager
     {
-        private const string ScoreKey = "UserScore";
-        private const string ScoreFileName = "userScore.txt";
+        private const string ScoreKey = "userMoney";
+        private const string ScoreFileName = "userMoney.txt";
 
         public static int GetScore()
         {
@@ -39,6 +40,11 @@ namespace SakuraLounge
                 await writer.WriteLineAsync(GetScore().ToString());
             }
         }
+        public static void SetScore(int score)
+        {
+            var localSettings = ApplicationData.Current.LocalSettings;
+            localSettings.Values[ScoreKey] = score;
+        }
 
         public static async Task LoadScoreFromFileAsync()
         {
@@ -52,13 +58,19 @@ namespace SakuraLounge
                 {
                     if (int.TryParse(await reader.ReadLineAsync(), out int score))
                     {
-                        AddScore(score);
+                        Debug.WriteLine("Score loaded: " + score);
+                        SetScore(score);
                     }
                 }
             }
             catch (FileNotFoundException)
             {
-                
+                Debug.WriteLine("Score file not found.");
+            }
+            catch (Exception ex)
+            {
+                // Handle other exceptions or add debug logging.
+                Debug.WriteLine("Error loading score: " + ex.Message);
             }
         }
     }

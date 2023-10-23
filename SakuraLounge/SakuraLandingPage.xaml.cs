@@ -26,6 +26,8 @@ namespace SakuraLounge
         public SakuraLandingPage()
         {
             this.InitializeComponent();
+            int currentScore = ScoreManager.GetScore();
+            ScoreTextBlock.Text = "Score: " + currentScore.ToString();
 
             #region Setup the device sizing for the application  
             ApplicationView.GetForCurrentView().TryResizeView(new Size(App.DeviceScreenWidth, App.DeviceScreenHeight));
