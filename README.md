@@ -19,15 +19,6 @@ Sakura Lounge is a Japanese-themed entertainment application built using the Uni
 - Windows 10 (version 1803 or later)
 - Visual Studio 2019 or later with UWP development workload installed
 
-### Installation
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/sakura-lounge.git
-   ```
-2. Open the `SakuraLounge.sln` solution file in Visual Studio.
-3. Restore NuGet packages if needed.
-4. Build the solution.
 
 ### Running the Application
 
