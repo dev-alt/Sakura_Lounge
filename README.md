@@ -1,6 +1,5 @@
 # Sakura Lounge
 
-![Sakura Lounge Logo](Assets/Sakura%20Lounge.png)
 
 Sakura Lounge is a Japanese-themed entertainment application built using the Universal Windows Platform (UWP). It offers a variety of mini-games and features inspired by Japanese culture and casino-style activities.
 
